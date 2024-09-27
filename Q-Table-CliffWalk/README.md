@@ -6,6 +6,9 @@ Below is also print out of the policy that agent learned from Q-Table. As shown,
 (1st element in bottom line), go up and right all way to last element and then go down to final state (last element in bottom line) and get penalized -1 
 for every step.
 
+I coded Q_TABLE_Agent class to be free from environment dependency. That is, the class can be used with any other environment without any changes.
+Notice all gym environment related calls are located in main. 
+
 <div align="center">
   <br>
   <img src="../Assets/Q-Table-CliffWalking-print.png" alt="Learned Policy" title="Learned Policy" />
