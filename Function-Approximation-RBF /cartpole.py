@@ -4,8 +4,7 @@ import matplotlib.pyplot as plt
 from sklearn.kernel_approximation import RBFSampler
 
 class Approximator_Agent:
-    ''' Generic funtion approximator agent. It uses RBF for approximation and approximate
-        state and action. Therefor the learn function takes both state and action.
+    ''' Generic funtion approximator agent. It uses RBF for state-action approximation.
         samples: randomly collected samples from env. It is used to fit RFB sampler for better state represntation
         alpha: learning rate
         gamma: discount factor
