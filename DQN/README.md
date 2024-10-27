@@ -19,19 +19,25 @@ A **soft update** mechanism was used, updating the target network at each learni
 
 Exploration was decayed at the episode level, as action-level decay within episodes destabilized learning. The chosen strategy helped the agent gradually shift from exploration to exploitation, improving learning stability.
 
-## Potential Improvements
-
-Future work could experiment with:
-- **Reducing Soft Update Frequency** to every few hundred steps.
-- **Lowering the Soft Update Rate (τ)** to minimize instability.
-- **Switching to Hard Updates** at fixed intervals for more stable training phases.
-
----
-
 
 <div align="center">
   <br>
-  <img src="../Assets/DQN-CartPole.png" alt="Learned Policy" title="Learned Rewards" />
+  <img src="../Assets/DQN-CartPole.png" alt="Learned Rewards" title="Learned Rewards" />
   <p>Learned Rewards</p>
 </div>
+
+
+## Second Training Run with Stopping Condition
+A second training run was conducted with a modified stopping condition: the training was set to stop if the agent achieved the maximum reward of 500 for 3 consecutive evaluation points. This modification produced the following results:
+- **Steady Learning Progress**: The agent’s rewards increased gradually, with no severe drops or fluctuations, indicating more stable learning.
+- **Max Reward Achievement**: Around 7000 episodes, the agent reached the maximum reward of 500 for 3 consecutive points, at which point training stopped.
+- **Improved Stability**: This stopping condition prevented overfitting or policy degradation, allowing the agent to retain an optimal policy without the instability observed in previous runs.
+
+<div align="center">
+  <br>
+  <img src="../Assets/DQN-CartPole-Short-Run.png" alt="Learned Rewards" title="Learned Rewards" />
+  <p>Learned Rewards</p>
+</div>
+
+---
 
