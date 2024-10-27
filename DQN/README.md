@@ -1,32 +1,37 @@
-# Deep Q-Network (DQN) Implementation with Gym CartPole
+# Deep Q-Network (DQN) Implementation on Gym CartPole
 
-This project implements a Deep Q-Network (DQN) to train an agent in the CartPole environment from OpenAI's Gymnasium. The main objective is to achieve a stable training performance, tuning hyperparameters to optimize the agent's ability to balance the pole effectively.
+This project implements a Deep Q-Network (DQN) to train an agent in the CartPole environment from OpenAI's Gymnasium. The objective is to achieve stable training performance by tuning hyperparameters and managing target network updates.
 
 **Environment:** [CartPole-v1](https://gymnasium.farama.org/environments/classic_control/cart_pole/)
 
 ## Project Overview
 
-Initially, the agent demonstrated rapid progress, reaching rewards over 250 due to Q-value overestimation. However, as training continued, rewards declined, and the agent gradually improved through further learning cycles. Around the 4000th epoch, the agent achieved the maximum reward of 500 across three consecutive evaluation points (each point representing a rolling average of 100 episodes), indicating consistent performance across roughly 300 episodes with rewards of 500 or close to it.
+The agent shows promising performance in reaching near-max rewards but struggles with consistency, especially in later training epochs. The agent initially showed rapid improvement, reaching rewards over 250 due to Q-value overestimation. Around 4000 epochs, the agent achieved the maximum reward of 500 across multiple evaluation points (each representing a rolling average of 100 episodes), indicating consistent performance over about 300 episodes. However, stability remained an issue as rewards fluctuated significantly in later training epochs.
 
-While this indicated promising stability, the agent's learning became less consistent beyond this point, likely due to the continuous soft updates applied to the target network. Soft updates caused the agent to keep refining its policy even after reaching optimal performance, leading to periods of suboptimal policy shifts and recovery phases.
+## Observations on Stability and Soft Updates
 
-The agent achieved maximum rewards across five consecutive evaluation points around the 10,000th epoch, confirming the stability achieved through earlier training. Unsure of the optimal stopping point, the training session was extended to 20,000 epochs to observe longer-term patterns.
+A **soft update** mechanism was used, updating the target network at each learning step. While this approach allows for smoother transitions, it introduced instability in later stages of training:
+- **Continuous Parameter Drift**: Frequent updates to the target network caused slight shifts in Q-values, leading the agent to oscillate between near-optimal and suboptimal policies.
+- **Accumulation of Small Errors**: Small cumulative errors introduced by continuous updates prevented the agent from fully consolidating an optimal policy, resulting in fluctuating rewards.
+- **Unstable Long-Term Behavior**: Although the agent achieved 500 reward points at various intervals, further updates led it to "forget" effective policies temporarily, impacting consistency.
 
 ## Exploration Strategy
 
-Exploration was decayed at the episode level, rather than per action within episodes, as action-level decay destabilized the learning process significantly. By decaying exploration across episodes, the agent was able to achieve improved stability and maintain a more reliable policy.
+Exploration was decayed at the episode level, as action-level decay within episodes destabilized learning. The chosen strategy helped the agent gradually shift from exploration to exploitation, improving learning stability.
 
-## Key Observations
-- **Q-value Overestimation**: Rapid initial success in rewards indicated overestimation of Q-values.
-- **Training Stability**: Reached a consistent performance (reward of 500) around 4000 epochs, with occasional fluctuations due to soft updates.
-- **Exploration Decay**: Episode-level decay provided stability, while action-level decay destabilized learning.
+## Potential Improvements
+
+Future work could experiment with:
+- **Reducing Soft Update Frequency** to every few hundred steps.
+- **Lowering the Soft Update Rate (τ)** to minimize instability.
+- **Switching to Hard Updates** at fixed intervals for more stable training phases.
 
 ---
 
 
 <div align="center">
   <br>
-  <img src="../Assets/DQN-CartPole.png" alt="Learned Policy" title="Learned Policy" />
-  <p>Learned Policy</p>
+  <img src="../Assets/DQN-CartPole.png" alt="Learned Policy" title="Learned Rewards" />
+  <p>Learned Rewards</p>
 </div>
 
