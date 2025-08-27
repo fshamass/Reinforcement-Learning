@@ -18,7 +18,7 @@ Traditional ACC systems react to immediate conditions. This system uses sequence
 ## System Architecture
 <div align="center">
   <br>
-  <img src="../Assets/PACC/System-Architecture.png" alt="System Architecture" title="System Architecture" style="display:inline-block; width:60%;"/>
+  <img src="../Assets/PACC/System-Architecture.png" alt="System Architecture" title="System Architecture" style="display:inline-block; width:80%;"/>
 </div>
 
 
@@ -54,7 +54,7 @@ sequenceDiagram
 
 
 ### Webots Simulation Flow
-<div style="width: 600%; max-width: 700px; margin: auto;">
+<div style="width: 400%; max-width: 600px; margin: auto;">
   
 ```mermaid
 sequenceDiagram
@@ -176,13 +176,5 @@ If you use this work in your research, please cite:
   note={In development}
 }
 ```
-
-## 🔗 Related Work
-
-- [Traffic Flow Theory and Control](relevant_papers)
-- [Reinforcement Learning for Autonomous Vehicles](relevant_papers)  
-- [Adaptive Cruise Control Systems](relevant_papers)
-
----
 
 *This project demonstrates the potential of reinforcement learning to create more intelligent and cooperative autonomous vehicle systems that benefit overall traffic dynamics, not just individual vehicle safety.*
