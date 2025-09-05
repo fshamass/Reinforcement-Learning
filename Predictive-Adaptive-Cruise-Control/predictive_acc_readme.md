@@ -162,6 +162,8 @@ in my reward function design, the episode terminates if ego vehicle crash, dista
 From lead_lateral_dist_reward and lead_lost_reward graphs, It is observed from initial learning iterations that agent is learning to reduce the offset between ego  and lead vehicles. The lead_distance_reward is confusing, it is showing the rewards increasing as ego vehicle speed is lowered which is counter intuitive.
 The fact is, agent learns it is better to slow down and have the speed difference condition triggered pretty quickly (around 2 sec) and take the penalty from that than continue speeding and accumulating penalties from safe distance over time until safe distance is reached. In addition to that, speeding adds risk of incurring  other penalties from possibility of crash. The agent learns in early iteration that speed make it vulnerable to crash penalties. 
 
+![Demo Video](../Assets/PACC/slow_start_episode.gif)
+
 I will try few strategies to deal this and update
 
 
