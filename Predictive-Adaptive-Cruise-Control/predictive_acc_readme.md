@@ -169,6 +169,7 @@ progress is made, ego vehicle now maintains 4 km/h below lead vehicle speed, cau
 The agent is stuck in a local minimum - preferring excessive distance (small penalties) over risking collision (major penalty). Working on reward tuning to encourage closer following while maintaining safety.
 
 ![Demo Video](../Assets/PACC/episode_4kmh.gif)
+
 Youtube: https://youtu.be/iWgzYycQids
 
 
