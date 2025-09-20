@@ -164,7 +164,12 @@ The fact is, agent learns it is better to slow down and have the speed differenc
 
 ![Demo Video](../Assets/PACC/slow_start_episode.gif)
 
-I will try few strategies to deal this and update
+Update:
+progress is made, ego vehicle now maintains 4 km/h below lead vehicle speed, causing gap to continuously increase. Agent has learned collision avoidance but not optimal following.
+The agent is stuck in a local minimum - preferring excessive distance (small penalties) over risking collision (major penalty). Working on reward tuning to encourage closer following while maintaining safety.
+
+![Demo Video](../Assets/PACC/episode_4kmh.gif)
+Youtube: https://youtu.be/iWgzYycQids
 
 
 ## 📚 Citation
