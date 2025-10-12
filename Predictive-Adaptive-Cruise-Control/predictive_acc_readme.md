@@ -142,7 +142,7 @@ The core issue is twofold: first, the shortened episode duration limits the agen
 
 To further debug and validate my assumptions, I segmented the rewards awarded in every step and plot it using tensorflow as show below:
 
-**Tensor Flow Graphs**:
+**Tensorflow Graphs**:
 <div align="center">
     <br>
     <img src="../Assets/PACC/lead_lateral_distance_reward.png" alt="" title="Lead Vehicle Lateral Distance Reward" style="display:inline-block; width:25%; margin-right:2%;" />
@@ -172,6 +172,24 @@ The agent is stuck in a local minimum - preferring excessive distance (small pen
 
 Youtube: https://youtu.be/iWgzYycQids
 
+Update:
+I was able to train the agent to successfully follow lead vehicle that is cruising at constant and variable speed while maintaining 3 meters gap.
+
+Const Lead vehicle speed:
+
+![Demo Video](../Assets/PACC/constant_speed_following.gif)
+
+Youtube: https://youtu.be/BjscS3EJx5I
+
+Variable Lead vehicle speed:
+
+Youtube: https://youtu.be/3M9k-nHVEp0
+
+**Updated Tensorflow Graphs**:
+<div align="center">
+    <img src="../Assets/PACC/acc_losses.png" alt="" title="SAC Losses" style="display:inline-block; width:75%; margin-right:2%;" />
+    <img src="../Assets/PACC/acc_mean_ewards.png" alt="" title="Reward" style="display:inline-block; width:21.5%;" />
+</div>
 
 ## 📚 Citation
 
