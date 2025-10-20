@@ -126,12 +126,12 @@ Multi-objective reward function optimizing for:
 - ✅ SAC training implementation
 - ✅ Basic reward function design
 - ✅ Observation space definition
+- ✅ Straight line simulation world ACC
 
 
 **In Progress**:
-- 🔄 Reward function optimization
-- 🔄 Hyperparameter optimization
-- 🔄 Advanced reward shaping
+- 🔄 Curved roads vehicle following simulation
+
 
 ## 📈 Results and Analysis
 
