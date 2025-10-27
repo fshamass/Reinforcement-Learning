@@ -163,7 +163,8 @@ The fact is, agent learns it is better to slow down and have the speed differenc
 
 ![Demo Video](../Assets/PACC/slow_start_episode.gif)
 
-Update:
+<br><br>
+###  Update:
 progress is made, ego vehicle now maintains 4 km/h below lead vehicle speed, causing gap to continuously increase. Agent has learned collision avoidance but not optimal following.
 The agent is stuck in a local minimum - preferring excessive distance (small penalties) over risking collision (major penalty). Working on reward tuning to encourage closer following while maintaining safety.
 
@@ -171,7 +172,8 @@ The agent is stuck in a local minimum - preferring excessive distance (small pen
 
 Youtube: https://youtu.be/iWgzYycQids
 
-Update:
+<br><br>
+###  Update:
 I was able to train the agent to successfully follow lead vehicle that is cruising at constant and variable speed while maintaining 3 meters gap.
 
 Const Lead vehicle speed:
@@ -191,8 +193,8 @@ Youtube: https://youtu.be/3M9k-nHVEp0
 </div>
 
 
-
-Update:
+<br><br>
+### Update:
 Here is my 1st stab at object following in addition to ACC. I added curves and obstacles to my previous simulation to make it closer to urban driving.
 The agent is performing well but raw output of the agent for steering wheel is jittery. More work needed for stabilizing the steering angle either with
 more training or passing it through low pass filter. I will need to figure out what is the source of jitter and decide what is the next step.
