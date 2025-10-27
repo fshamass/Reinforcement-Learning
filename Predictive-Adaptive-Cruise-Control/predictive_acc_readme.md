@@ -190,6 +190,19 @@ Youtube: https://youtu.be/3M9k-nHVEp0
     <img src="../Assets/PACC/acc_mean_ewards.png" alt="" title="Reward" style="display:inline-block; width:21.5%;" />
 </div>
 
+
+
+Update:
+Here is my 1st stab at object following in addition to ACC. I added curves and obstacles to my previous simulation to make it closer to urban driving.
+The agent is performing well but raw output of the agent for steering wheel is jittery. More work needed for stabilizing the steering angle either with
+more training or passing it through low pass filter. I will need to figure out what is the source of jitter and decide what is the next step.
+Also, the agent is not trained on lead vehicle full stop which will need more training.
+
+![Demo Video](../Assets/PACC/following_plus_acc.gif)
+
+Youtube: Youtube: https://youtu.be/YkDGX0e78rg
+
+
 ## 📚 Citation
 
 If you use this work in your research, please cite:
