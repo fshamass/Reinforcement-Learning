@@ -6,6 +6,6 @@ Below is plot of agent rewards during learning process.
 
 <br><br>
 <div align="center">
-  <img src="../Assets/RBF-Approximation-CartPole-Rewards.png" alt="Learned Rewards" title="Learned rewards" />
+  <img src="../../Assets/RBF-Approximation-CartPole-Rewards.png" alt="Learned Rewards" title="Learned rewards" />
   <p>Learned Rewards</p>
 </div>

@@ -27,7 +27,7 @@ These settings promote exploration early in training (via the entropy coefficien
 The training results provide a comprehensive view of the PPO agent’s learning process. Below is a detailed analysis of the three key metrics: default policy performance, mean episode return, and minimum episode return, based on a training run completed on 2025-04-24 at 16:21:01.
 
 ### 1. Default Policy Performance
-![Default Policy](../Assets/PPO-Ray[rllib]-cartpole-default-policy.png)
+![Default Policy](../../Assets/PPO-Ray[rllib]-cartpole-default-policy.png)
 - **Plot Description**: Tracks the episode return over 40 training steps. The x-axis represents steps (0 to 40), and the y-axis shows the reward, ranging from ~350 to 500.
 - **Observations**:
   - The episode return starts at ~350, indicating the agent can balance the pole for a moderate duration initially.
@@ -41,7 +41,7 @@ The training results provide a comprehensive view of the PPO agent’s learning 
   - The short training time underscores PPO’s sample efficiency and the scalability of Ray RLlib.
 
 ### 2. Mean Episode Return
-![Episode Return Mean](../Assets/PPO-Ray[rllib]-cartpole-mean-return.png)
+![Episode Return Mean](../../Assets/PPO-Ray[rllib]-cartpole-mean-return.png)
 - **Plot Description**: Shows the mean episode return over 40 runs. The x-axis represents runs (0 to 40), and the y-axis shows the mean return, ranging from ~350 to 500.
 - **Observations**:
   - The mean return begins at ~350 and rises steadily, with significant gains between runs 5 and 20, reaching ~450.
@@ -53,7 +53,7 @@ The training results provide a comprehensive view of the PPO agent’s learning 
   - Minor fluctuations between runs 10 and 20 indicate variability during learning, which is expected as the agent explores different actions.
 
 ### 3. Minimum Episode Return
-![Episode Return Minimum](../Assets/PPO-Ray[rllib]-cartpole-min-return.png)
+![Episode Return Minimum](../../Assets/PPO-Ray[rllib]-cartpole-min-return.png)
 - **Plot Description**: Tracks the minimum episode return over 40 runs. The x-axis represents runs (0 to 40), and the y-axis shows the minimum return, ranging from 0 to ~462.
 - **Observations**:
   - The minimum return starts at 0, indicating some episodes fail completely (the pole falls quickly) in early training.

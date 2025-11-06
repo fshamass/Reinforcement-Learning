@@ -11,11 +11,11 @@ Notice all gym environment related calls are located in main.
 
 <div align="center">
   <br>
-  <img src="../Assets/Q-Table-CliffWalking-print.png" alt="Learned Policy" title="Learned Policy" />
+  <img src="../../Assets/Q-Table-CliffWalking-print.png" alt="Learned Policy" title="Learned Policy" />
   <p>Learned Policy</p>
 </div>
 <br><br>
 <div align="center">
-  <img src="../Assets/Q-Table-CliffWalking-Rewards.png" alt="Learned Policy" title="Learned rewards" />
+  <img src="../../Assets/Q-Table-CliffWalking-Rewards.png" alt="Learned Policy" title="Learned rewards" />
   <p>Learned Rewards</p>
 </div>
