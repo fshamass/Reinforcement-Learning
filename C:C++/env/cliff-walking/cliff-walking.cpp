@@ -33,7 +33,6 @@ tuple<int, int, bool, bool> CliffWalkingEnv::step(Actions action) {
     }
 
     numSteps_++;
-    currentState_ = -1;
     //Check for out of bounds and update position
     switch (action) {
         case Actions::UP: // up
@@ -48,27 +47,35 @@ tuple<int, int, bool, bool> CliffWalkingEnv::step(Actions action) {
         case Actions::LEFT: // left
             col -= 1;
             break;
+        default:
+            break;
     }
+
+    //If agent hit the wall, it stays in the same position and get 0 rewards
     if((row < 0) || (row > 3) || (col < 0) || (col > 11)) {
-        currentState_ = resetState_;
-        reward = -10;
+        reward = 0;
     }else {
         // Check for cliff
         if (row == 3 && col > 0 && col < 11) {
             currentState_ = resetState_;
             reward = -10;
+            done = true;
+        }else {
+            //Valid move
+            currentState_ = row * 12 + col;
+            reward = -1;    
         }
     }
-    if(currentState_ != resetState_) {
-        currentState_ = row * 12 + col;
-        reward = -1;
-    }
+    //Check for goal state
     if(currentState_ == 3 * 12 + 11) {
         done = true; // Reached goal
     }
-    if(numSteps_ >= 1000) {
+    //Check for max steps
+    if((numSteps_ >= 1000) && (!done)) {
         truncated = true; // Max steps reached
+        currentState_ = resetState_;
+        reward = -10;
     }
 
-    return make_tuple(currentState_, reward, done, truncated); // Normal step
+    return make_tuple(currentState_, reward, done, truncated);
 }
