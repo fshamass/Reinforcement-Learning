@@ -1,19 +1,21 @@
 #include <iostream>
-#include "cliff-walking.hpp"
+#include "cliff_walking.hpp"
 
 using namespace std;
 
 int main() {
     CliffWalkingEnv env; // Create environment with 0% slip probability - deterministic
     int state = env.reset();
-    vector<string> actionNames = {"UP", "RIGHT", "DOWN", "LEFT"};
+    vector<string> actionNames = env.getActionNames();
     std::cout << "Initial State: " << state << std::endl;
 
+    auto [minAction, maxAction] = env.getActionSpace();
+    int numActions = maxAction - minAction + 1;
+
     for (int i = 0; i < 10; ++i) {
-        int randAction = rand() % static_cast<int>(CliffWalkingEnv::Actions::NUM_ACTIONS);
-        CliffWalkingEnv::Actions action = static_cast<CliffWalkingEnv::Actions>(randAction);
+        int randAction = rand() % static_cast<int>(numActions);
         cout << "Taking action: " << actionNames[randAction] << endl;
-        auto [next_state, reward, done, truncated] = env.step(action);
+        auto [next_state, reward, done, truncated] = env.step(randAction);
         std::cout << "Step " << i + 1 << ": Next State: " << next_state 
                   << ", Reward: " << reward 
                   << ", Done: " << done 

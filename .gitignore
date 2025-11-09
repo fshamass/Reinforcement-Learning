@@ -2,3 +2,6 @@ __pycache__/
 .DS_Store
 *.zip
 build/
+lib/
+cliff_walking
+cliff_walking_demo

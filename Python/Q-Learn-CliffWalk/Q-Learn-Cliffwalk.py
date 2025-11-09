@@ -2,7 +2,7 @@ import numpy as np
 import gym
 import matplotlib.pyplot as plt
 
-class Q_Table_Agent:
+class Q_Learn_Agent:
     def __init__(self, states, actions, alpha, gamma, eps_decay_rate = 0.9, min_eps = 0.01):
         self.num_states = states
         self.num_actions = actions
@@ -41,7 +41,7 @@ class Q_Table_Agent:
 if __name__ == '__main__':
     print('Hello World')
     env = gym.make('CliffWalking-v0')
-    q_table_agent = Q_Table_Agent(env.observation_space.n, env.action_space.n, 0.02, 0.99)
+    q_learn_agent = Q_Learn_Agent(env.observation_space.n, env.action_space.n, 0.02, 0.99)
     N = 3000
     rewards = np.empty(N)
     ave_rewards = []
@@ -50,19 +50,19 @@ if __name__ == '__main__':
         if i%100 == 0:
             print("Processing round: ", i)
         state, _ = env.reset()
-        q_table_agent.reset_state()
+        q_learn_agent.reset_state()
         done = False
         reward = 0
         while not done:
-            action = q_table_agent.get_action(state)
+            action = q_learn_agent.get_action(state)
             new_state, cur_reward, done, _, _ = env.step(action)
             reward += cur_reward
-            q_table_agent.act(new_state, cur_reward)
+            q_learn_agent.act(new_state, cur_reward)
             state = new_state
         rewards[i] = reward
         ave_rewards.append(rewards[max(0,i-100):i].mean())
     plt.plot(ave_rewards)
-    policy = q_table_agent.get_policy()
+    policy = q_learn_agent.get_policy()
     policy[3,1:] = -1
     print("\nEstimated Optimal Policy (UP = 0, RIGHT = 1, DOWN = 2, LEFT = 3, N/A = -1):")
     print(policy)

@@ -20,6 +20,14 @@ using namespace std;
 
 class CliffWalkingEnv {
     public:
+        CliffWalkingEnv(float slipProb = 0.00);
+        // get min and max number of states and actions
+        pair<int,int> getObservationSpace();
+        pair<int,int> getActionSpace();
+        vector<string> getActionNames();
+        int reset();
+        tuple<int, int, bool, bool> step(int action);
+    private:
         enum class Actions {
             UP = 0,
             RIGHT = 1,
@@ -28,10 +36,6 @@ class CliffWalkingEnv {
             NUM_ACTIONS = 4    
         };
 
-        CliffWalkingEnv(float slipProb = 0.00);
-        int reset();
-        tuple<int, int, bool, bool> step(Actions action);
-    private:
         int numStates_;
         int currentState_;
         int resetState_;

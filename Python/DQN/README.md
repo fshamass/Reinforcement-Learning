@@ -22,7 +22,7 @@ Exploration was decayed at the episode level, as action-level decay within episo
 
 <div align="center">
   <br>
-  <img src="../../Assets/DQN-CartPole.png" alt="Learned Rewards" title="Learned Rewards" />
+  <img src="../../assets/DQN-CartPole.png" alt="Learned Rewards" title="Learned Rewards" />
   <p>Learned Rewards</p>
 </div>
 
@@ -35,7 +35,7 @@ A second training run was conducted with a modified stopping condition: the trai
 
 <div align="center">
   <br>
-  <img src="../../Assets/DQN-CartPole-Short-Run.png" alt="Learned Rewards" title="Learned Rewards" />
+  <img src="../../assets/DQN-CartPole-Short-Run.png" alt="Learned Rewards" title="Learned Rewards" />
   <p>Learned Rewards</p>
 </div>
 

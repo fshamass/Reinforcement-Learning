@@ -18,7 +18,7 @@ Traditional ACC systems react to immediate conditions. This system uses sequence
 ## System Architecture
 <div align="center">
   <br>
-  <img src="../../Assets/PACC/System-Architecture.png" alt="System Architecture" title="System Architecture" style="display:inline-block; width:80%;"/>
+  <img src="../../assets/PACC/System-Architecture.png" alt="System Architecture" title="System Architecture" style="display:inline-block; width:80%;"/>
 </div>
 
 
@@ -144,11 +144,11 @@ To further debug and validate my assumptions, I segmented the rewards awarded in
 **Tensorflow Graphs**:
 <div align="center">
     <br>
-    <img src="../../Assets/PACC/lead_lateral_distance_reward.png" alt="" title="Lead Vehicle Lateral Distance Reward" style="display:inline-block; width:25%; margin-right:2%;" />
-    <img src="../../Assets/PACC/lead_lost_reward.png" alt="" title="Lead Vehicle Lost Reward" style="display:inline-block; width:25%;" />
-    <img src="../../Assets/PACC/lead_distance_reward.png" alt="" title="Distance to Lead vehicle Reward" style="display:inline-block; width:25%;" />
-    <img src="../../Assets/PACC/ego_speed.png" alt="" title="Ego Vehicle Speed" style="display:inline-block; width:25%;" />
-    <img src="../../Assets/PACC/agent_mean_reward.png" alt="" title="Agent Mean Rewards" style="display:inline-block; width:25%;" />
+    <img src="../../assets/PACC/lead_lateral_distance_reward.png" alt="" title="Lead Vehicle Lateral Distance Reward" style="display:inline-block; width:25%; margin-right:2%;" />
+    <img src="../../assets/PACC/lead_lost_reward.png" alt="" title="Lead Vehicle Lost Reward" style="display:inline-block; width:25%;" />
+    <img src="../../assets/PACC/lead_distance_reward.png" alt="" title="Distance to Lead vehicle Reward" style="display:inline-block; width:25%;" />
+    <img src="../../assets/PACC/ego_speed.png" alt="" title="Ego Vehicle Speed" style="display:inline-block; width:25%;" />
+    <img src="../../assets/PACC/agent_mean_reward.png" alt="" title="Agent Mean Rewards" style="display:inline-block; width:25%;" />
 </div>
 
 lead_lateral_dist_reward: Rewards given based on lateral offset of lead vehicle
@@ -161,14 +161,14 @@ in my reward function design, the episode terminates if ego vehicle crash, dista
 From lead_lateral_dist_reward and lead_lost_reward graphs, It is observed from initial learning iterations that agent is learning to reduce the offset between ego  and lead vehicles. The lead_distance_reward is confusing, it is showing the rewards increasing as ego vehicle speed is lowered which is counter intuitive.
 The fact is, agent learns it is better to slow down and have the speed difference condition triggered pretty quickly (around 2 sec) and take the penalty from that than continue speeding and accumulating penalties from safe distance over time until safe distance is reached. In addition to that, speeding adds risk of incurring  other penalties from possibility of crash. The agent learns in early iteration that speed make it vulnerable to crash penalties. 
 
-![Demo Video](../../Assets/PACC/slow_start_episode.gif)
+![Demo Video](../../assets/PACC/slow_start_episode.gif)
 
 <br><br>
 ###  Update:
 progress is made, ego vehicle now maintains 4 km/h below lead vehicle speed, causing gap to continuously increase. Agent has learned collision avoidance but not optimal following.
 The agent is stuck in a local minimum - preferring excessive distance (small penalties) over risking collision (major penalty). Working on reward tuning to encourage closer following while maintaining safety.
 
-![Demo Video](../../Assets/PACC/episode_4kmh.gif)
+![Demo Video](../../assets/PACC/episode_4kmh.gif)
 
 Youtube: https://youtu.be/iWgzYycQids
 
@@ -178,7 +178,7 @@ I was able to train the agent to successfully follow lead vehicle that is cruisi
 
 Const Lead vehicle speed:
 
-![Demo Video](../../Assets/PACC/constant_speed_following.gif)
+![Demo Video](../../assets/PACC/constant_speed_following.gif)
 
 Youtube: https://youtu.be/BjscS3EJx5I
 
@@ -188,8 +188,8 @@ Youtube: https://youtu.be/3M9k-nHVEp0
 
 **Updated Tensorflow Graphs**:
 <div align="center">
-    <img src="../../Assets/PACC/acc_losses.png" alt="" title="SAC Losses" style="display:inline-block; width:75%; margin-right:2%;" />
-    <img src="../../Assets/PACC/acc_mean_ewards.png" alt="" title="Reward" style="display:inline-block; width:21.5%;" />
+    <img src="../../assets/PACC/acc_losses.png" alt="" title="SAC Losses" style="display:inline-block; width:75%; margin-right:2%;" />
+    <img src="../../assets/PACC/acc_mean_ewards.png" alt="" title="Reward" style="display:inline-block; width:21.5%;" />
 </div>
 
 
@@ -200,7 +200,7 @@ The agent is performing well but raw output of the agent for steering wheel is j
 more training or passing it through low pass filter. I will need to figure out what is the source of jitter and decide what is the next step.
 Also, the agent is not trained on lead vehicle full stop which will need more training.
 
-![Demo Video](../../Assets/PACC/following_plus_acc.gif)
+![Demo Video](../../assets/PACC/following_plus_acc.gif)
 
 Youtube: Youtube: https://youtu.be/YkDGX0e78rg
 
