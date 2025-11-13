@@ -211,7 +211,7 @@ New milestone achieved! RL agent has now learned to do the following multitasks:
 2. Support stop and go driving behavior
 3. Seamlessly following a lead vehicle. 
 
-Now the challenge is to filter out the wiggle in ego vehicle steering due to noisy policy outputs, exploration noise in SAC algorithm.
+Now the challenge is the jitter in ego vehicle steering which is a common issue in continuous control tasks with SAC, often stemming from the stochastic policy (Gaussian sampling during exploration) or from the policy not fully accounting for the dynamics of previous actions in partially observable environments. Even in deterministic evaluation mode (where SAC takes the mean action without sampling), residual "jitter" can persist if the policy hasn't learned smooth transitions. My next focus will be on filter out the jitter and provide smooth steering action.
 
 ![Demo Video](../assets/PACC/lead_curve_and_full_stop.gif)
 
