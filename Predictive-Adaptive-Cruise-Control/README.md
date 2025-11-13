@@ -204,6 +204,18 @@ Also, the agent is not trained on lead vehicle full stop which will need more tr
 
 Youtube: Youtube: https://youtu.be/YkDGX0e78rg
 
+<br><br>
+### Update:
+New milestone achieved! RL agent has now learned to do the following multitasks:
+1. Adaptive Cruise Control (ACC) 
+2. Support stop and go driving behavior
+3. Seamlessly following a lead vehicle. 
+
+Now the challenge is to filter out the wiggle in ego vehicle steering due to noisy policy outputs, exploration noise in SAC algorithm.
+
+![Demo Video](../assets/PACC/lead_curve_and_full_stop.gif)
+
+Youtube: Youtube: https://youtu.be/EeZc9x8zn4M
 
 ## 📚 Citation
 
