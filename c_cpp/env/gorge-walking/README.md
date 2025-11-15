@@ -67,7 +67,7 @@ From the gorge-walking directory run the demo executable (name depends on build;
 
 The demo shows basic interaction with the environment and prints transitions and rewards.
 
-## Example usage (pseudo)
+## Example usage
 
 <div align="left">
   <br>

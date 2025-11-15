@@ -68,7 +68,7 @@ From the SARSA directory:
 
 ## Example Results
 
-Training the SARSA agent on the gorge walking environment (as defined in [env/gorge-walking/main.cpp](../../env/gorge-walking/main.cpp)) with 700 episodes produces excellent results. The learned policy successfully navigates around the gorge obstacles to reach the goal:
+Training the SARSA agent on the gorge walking environment (as defined in [env/gorge-walking/README.md](../../env/gorge-walking/README.md#example-usage)) with 700 episodes produces excellent results. The learned policy successfully navigates around the gorge obstacles to reach the goal:
 
 ```bash
 ./gorge_walking 700
@@ -108,7 +108,6 @@ A visual depiction of the final learned policy is shown below:
 <div align="left">
   <br>
   <img src="../../../assets/gorge-walking-solution.png" alt="Gorge Solution" title="Gorge Solution" />
-  <p>Gorge Solution</p>
 </div>
 
 ## Troubleshooting
