@@ -76,7 +76,7 @@ The demo shows basic interaction with the environment and prints transitions and
 </div>
 
 ```cpp
-// create a 7x7 grid with a gorge shown in image above
+// create a 7x7 grid with a gorge shown in image above with no slippage
 std::vector<std::pair<int,int>> gorge = 
 {{1,1},{2,1},{3,1},{4,1},{4,2},{4,3},{5,3},{6,3},{0,3},{0,4},{0,5},{1,5},{2,5},{4,5},{5,5},{6,5}};
 GorgeWalkingEnv env(7, 7, gorge);
