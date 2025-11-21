@@ -17,13 +17,18 @@ Transfer the trained RL policy from Webots simulation to physical hardware, enab
 **Objective**: Select appropriate hardware platforms for lead and ego vehicles.
 
 #### Lead Vehicle
-**Selected**: RC Drift Car, 1:14 Remote Control Car 4WD
-- **Specs**: 4WD, 28km/h max speed, drift-capable
+**Selected**: [KEYESTUDIO Smart Car Kit](https://www.amazon.com/KEYESTUDIO-Bluetooth-Controller-Ultrasonic-Programming/dp/B08276N3D9)
+- **Specs**:
+  - Differential drive robot platform
+  - Programmable speed control (Arduino-based)
+  - Bluetooth/WiFi control capability
+  - Max speed: ~2 m/s (7.2 km/h)
 - **Rationale**:
-  - Simple RC control sufficient for target vehicle role
-  - Variable speed capability matches simulation lead vehicle
-  - Cost-effective solution
-  - Easy manual control for testing scenarios
+  - Cost-effective solution for hardware validation
+  - Programmable for constant speed testing (calibration)
+  - AprilTag detection is faster (2-5ms) and more reliable than YOLO
+  - Easy to add speed controller for fixed-velocity testing
+  - Can be upgraded with GPS module for closed-loop speed control if needed
 
 #### Ego Vehicle
 **Selected**: [Hiwonder JetAcker (Advanced Variant)](https://www.hiwonder.com/products/jetacker?variant=41203656327255)
@@ -136,10 +141,47 @@ Transfer the trained RL policy from Webots simulation to physical hardware, enab
    - Publish lead vehicle state (distance, relative velocity, lateral offset)
 
 
-**Performance Targets**:
-- Object detection: >20 FPS
-- Sensor fusion latency: <30ms
-- State estimation accuracy: ±5% for velocity, ±10cm for distance
+**Performance Targets (Critical Real-Time Constraint)**:
+
+The simulation currently runs in synchronous/stepped mode with 20ms timesteps - the supervisor pauses Webots until perception and policy inference complete. However, on real hardware there is no "pause button" - the control loop must complete within 20ms to maintain real-time operation.
+
+**Estimated Latency Budget Breakdown**:
+- Camera frame capture: ~2-3ms
+- Object detection (YOLOv8-nano/tiny + TensorRT): ~8-12ms ⚠️ **Primary bottleneck**
+- Lidar scan reading: ~1ms
+- Sensor fusion (distance, relative velocity, lateral offset): ~2-3ms
+- RL policy inference: ~2-4ms
+- Motor control commands: ~1ms
+- **Total: ~16-24ms** (tight fit, will most likely require optimization)
+
+**Mitigation Strategies**:
+1. **Simulation Latency Training** (Phase 2.3):
+   - Add 1-2 timestep observation delays (20-40ms) during ROS2 simulation retraining
+   - Train policy to be robust to perception-action latency
+   - This will close the sim-to-real gap for timing
+
+2. **Model Optimization** (Phase 3.2):
+   - Use YOLOv8-nano with TensorRT FP16 quantization on Jetson
+   - Target: 8-10ms inference time for object detection
+
+3. **Reduced Detection Rate** (if needed):
+   - Run object detection at 25-30 Hz (every 30-40ms)
+   - Use temporal filtering/Kalman filter to interpolate between detections
+   - Policy receives smoothed state estimates
+
+4. **Async Processing Pipeline**:
+   - Overlap perception and control using previous frame's detection
+   - Reduces effective latency at cost of slight staleness
+
+5. **Fallback Option**:
+   - Accept 30-40ms control loop rate and retrain with longer timestep
+   - Reduces real-time pressure but requires additional training
+
+**Success Criteria**:
+- ✅ Maintain 20ms (50Hz) control loop rate on Jetson Orin 8GB
+- ✅ Policy successfully performs ACC + vehicle following with real-world latency
+- ✅ Smooth steering control (no excessive jitter from pipeline delays)
+- ✅ Safe following distance maintained (3-4m target gap)
 
 #### 3.3 Control Pipeline Deployment
 **Tasks**:
@@ -226,7 +268,7 @@ Transfer the trained RL policy from Webots simulation to physical hardware, enab
 6. Repeat until performance targets met
 
 **Performance Targets**:
-- Maintain 3m ± 0.5m following distance
+- Maintain 4m ± 0.5m following distance
 - Smooth steering (max jerk < 2 rad/s³)
 - Safe operation in 95% of test scenarios
 - Handle lead vehicle speeds: 0-25 km/h
@@ -238,8 +280,8 @@ Transfer the trained RL policy from Webots simulation to physical hardware, enab
 ## 🛠️ Technical Stack
 
 ### Software
-- **Simulation**: Webots 2023b+
-- **Middleware**: ROS2 Humble/Iron
+- **Simulation**: Webots 2025a
+- **Middleware**: ROS2 Humble
 - **ML Framework**: Stable-Baselines3, PyTorch
 - **Computer Vision**: OpenCV, YOLOv8/v11
 - **Inference Optimization**: ONNX Runtime, TensorRT
@@ -247,7 +289,7 @@ Transfer the trained RL policy from Webots simulation to physical hardware, enab
 
 ### Hardware
 - **Compute**: NVIDIA Jetson Orin 8GB
-- **Sensors**: Camera, Radar, IMU
+- **Sensors**: Camera, Lidar, IMU
 - **Platforms**: JetAcker (ego), RC Drift Car (lead)
 
 ---
@@ -256,12 +298,12 @@ Transfer the trained RL policy from Webots simulation to physical hardware, enab
 
 ### Simulation Metrics (Phase 2)
 - ✅ Training convergence equivalent to original implementation
-- ✅ Real-time inference latency < 50ms in ROS2 setup
+- ✅ Real-time inference latency < 20ms in ROS2 setup
 - ✅ Smooth policy execution without communication delays
 
 ### Hardware Metrics (Phase 3-4)
-- 🎯 End-to-end latency: perception → policy → control < 100ms
-- 🎯 Following distance accuracy: ±0.5m from 3m target
+- 🎯 End-to-end latency: perception → policy → control < 20ms
+- 🎯 Following distance accuracy: ±0.5m from 4m target
 - 🎯 Lateral tracking error: < 0.3m in curves
 - 🎯 Safe operation: 0 collisions in 100+ test runs
 - 🎯 Velocity matching: within 2 km/h of lead vehicle
@@ -289,7 +331,7 @@ Transfer the trained RL policy from Webots simulation to physical hardware, enab
 ### Challenge 3: Sensor Reliability
 **Impact**: Noisy/missing sensor data in real world
 **Mitigation**:
-- Robust sensor fusion (Kalman filtering)
+- Robust sensor fusion
 - Timeout handling and failsafes
 - Degraded mode operation (e.g., radar-only mode)
 - Extensive field testing
