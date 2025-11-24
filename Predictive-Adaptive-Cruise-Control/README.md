@@ -217,6 +217,24 @@ Now the challenge is the jitter in ego vehicle steering which is a common issue 
 
 Youtube: Youtube: https://youtu.be/EeZc9x8zn4M
 
+<br><br>
+### Update:
+I have finally able to achieve "A multi-modal RL-powered Adaptive Cruise Control (ACC) system" 
+
+Key highlights:
+Multi-task mastery: ACC for distance regulation, full stops at signals without collisions, and fluid navigation in curves.
+Robust performance: The agent handles everything in a single policy, completing episodes safely and efficiently.
+
+Technical innovations:
+To tackle steering jitter from the policy's inherent randomness (which is common issue in continuous control systems), I designed a custom neural network architecture and tailored the training process—achieving smooth control without any post-processing filters or PID controllers. The steering wheel is directly commanded by the RL policy, proving the power of optimized RL in continuous action spaces.
+
+My focus now will shift to deploying the algorithm to real hardware to prove the concept
+
+![Demo Video](../assets/PACC/curve_acc_full_stop_no_jitter.gif)
+
+Youtube: Youtube: https://youtu.be/-jzNiNxmXAw
+
+
 ## 📚 Citation
 
 If you use this work in your research, please cite:
