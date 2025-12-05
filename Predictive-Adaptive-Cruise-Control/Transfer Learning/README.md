@@ -63,6 +63,20 @@ Transfer the trained RL policy from Webots simulation to physical hardware, enab
   - Launch files and parameter management
   - Intermediate (and possibly advanced if needed) level learning
 
+**Architecture**:
+
+Because ROS 2 lacks native support for ARM macOS on my machine, I’ll deploy an Ubuntu VM in UTM to host all ROS 2 components and run Webots on the macOS host. The simulation and ROS 2 stack will be linked via the webots-ros2 bridge, enabling standard ROS 2 topics and services to flow between the host and the VM. Diagram below:
+
+<div align="center">
+      <img src="../../assets//PACC/ROS2_system_view.png" alt="System architecture diagram showing ROS2 integration between host macOS and UTM Linux VM." title="ROS2-Webots Communication Architecture" style="display:inline-block; width:50.0%;" />
+</div>
+<br>
+In my architecture design, I emphasized a modular design that effectively streamlines the transition to hardware deployment on a robot after ensuring successful inference on Webots simulation. By isolating the lead vehicle controller within the Webots simulation on the host machine, I optimize simulation performance and eliminate unnecessary components during real-world operation, as this controller becomes obsolete on physical hardware. Similarly, designating the webots_ros2_driver plugin as its own package facilitates straightforward removal or replacement when shifting to hardware-generated topics, minimizing reconfiguration efforts. This approach aligns well with ROS2 principles of composability and reusability, ensuring that core nodes like the supervisor, rl_sac, and ego_vehicle can interface seamlessly via standardized topics (e.g., rewards, norm_observations, actions, and observations) as shown below:
+<br><br>
+<div align="center">
+      <img src="../../assets//PACC/ROS2_architecture_view.png" alt="Architecture diagram showing ROS2 Components in UTM Linux VM." title="ROS2 Architecture" style="display:inline-block; width:50.0%;" />
+</div>
+
 **Resources**:
 - [ROS2 Official Tutorials](https://docs.ros.org/en/humble/Tutorials.html)
 - [ROS2 Navigation Stack](https://navigation.ros.org/)
